@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>AI Weather Monitoring</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="index.css" />
+</head>
+<body>
+  <h1>AI BASED WEATHER MONITORING</h1>
+
+  <nav id="navbar">
+    
+    <a href="#" class="active" onclick="showPage('home')">Homepage</a>
+    <a href="#" onclick="showPage('about')">About</a>
+    <a href="#" onclick="showPage('graph')">Demo</a>
+    <a href="#" onclick="showPage('live_updates')">Live Updates</a>
+    <a href="#" onclick="showPage('rain')">Rain Sensor Prediction</a>
+    <a href="#" onclick="showPage('Team')">Team details</a>
+  </nav>
+
+  <!-- Home Page Content -->
+  <div class="container active" id="home-page">
+    <h2>Latest Sensor Readings</h2>
+    <table class="sensor-table">
+      <thead>
+        <tr>
+          <th>Sensor</th>
+          <th>Parameter</th>
+          <th>Value</th>
+          <th>Unit</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>DHT11</td>
+          <td>Temperature</td>
+          <td id="temp_dht11">--</td>
+          <td>°C</td>
+        </tr>
+        <tr>
+          <td>DHT11</td>
+          <td>Humidity</td>
+          <td id="humidity_dht11">--</td>
+          <td>%</td>
+        </tr>
+        <tr>
+          <td>BMP280</td>
+          <td>Temperature</td>
+          <td id="temp_bmp280">--</td>
+          <td>°C</td>
+        </tr>
+        <tr>
+          <td>BMP280</td>
+          <td>Pressure</td>
+          <td id="pressure_bmp280">--</td>
+          <td>hPa</td>
+        </tr>
+        <tr>
+          <td>Fog Sensor</td>
+          <td>Fog Level</td>
+          <td id="fog_sensor">--</td>
+          <td>-</td>
+        </tr>
+        <tr>
+          <td>Rain Sensor</td>
+          <td>Rain Detected</td>
+          <td id="rain_sensor">--</td>
+          <td>-</td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="font-size:0.9em;color:#888;text-align:center;">(Values are fetched live from ThingSpeak.)</p>
+  </div>
+
+  <!-- About Page Content -->
+  <div class="container" id="about-page">
+    <h2>About the Project</h2>
+    <h3>Problem statement</h3>
+    <ul>
+      <li>Traditional weather monitoring systems often rely on large-scale data that lacks local specificity.</li>
+      <li>AI and machine learning integration with sensor data is still emerging in weather monitoring.</li>
+      <li>Limited access to real-time, hyperlocal weather data affects timely decision-making.</li>
+    </ul>
+    <h3>Solution</h3>
+    <ul>
+      <li>Collects real-time data from multiple sensors.</li>
+      <li>Processes data and can be used for ML model predictions.</li>
+    </ul>
+
+    <h3>Sensors Used (Hardware)</h3>
+    <ul>
+      <li><b>DHT11</b>: Measures temperature and humidity.</li>
+      <li><b>BMP280</b>: Measures temperature and atmospheric pressure.</li>
+      <li><b>Fog sensor</b>: Detects presence and density of fog.</li>
+      <li><b>Rain sensor</b>: Detects the presence of rain.</li>
+    </ul>
+
+    <h3>Software</h3>
+    <ul>
+      <li><b>ThingSpeak</b>: For data visualization, storage, and real-time access.</li>
+      <li><b>Arduino IDE</b>: For programming ESP8266 and monitoring sensor data.</li>
+    </ul>
+
+    <h3>Uniqueness of This Project</h3>
+    <ul>
+      <li><b>Local, Real-Time Data Collection</b>: Direct environmental monitoring.</li>
+      <li><b>Customizable Sensor Array</b>: Easily adaptable to different sensor needs.</li>
+      <li><b>Foundation for AI/ML Integration</b>: Provides the data backbone for predictive models.</li>
+    </ul>
+  </div>
+
+  <!-- Graph Page Content -->
+  <div class="container" id="graph-page">
+    <h2>Sensor Data Graphs</h2>
+
+    <h2><p style="text-align:center;">TEMPERATURE</p></h2>
+    <h4><p style="text-align:center;">Min: 4.2 &nbsp;&nbsp; Max: 35.8</p></h4>
+    <iframe width="450" height="260" src="https://thingspeak.com/channels/3002884/charts/1?dynamic=true&results=100"></iframe>
+    <br /><br /><br />
+
+    <h2><p style="text-align:center;">HUMIDITY</p></h2>
+    <h4><p style="text-align:center;">Min: 39% &nbsp;&nbsp; Max: 98%</p></h4>
+    <iframe width="450" height="260" src="https://thingspeak.com/channels/3002884/charts/2?dynamic=true&results=100"></iframe>
+    <br /><br /><br />
+
+    <h2><p style="text-align:center;">BMP PRESSURE</p></h2>
+    <h4><p style="text-align:center;">Min: 1000.0 &nbsp;&nbsp; Max: 1032.2</p></h4>
+    <iframe width="450" height="260" src="https://thingspeak.com/channels/3002884/charts/3?dynamic=true&results=100"></iframe>
+    <br /><br /><br />
+
+    <h2><p style="text-align:center;">BMP TEMPERATURE</p></h2>
+    <h4><p style="text-align:center;">Min: 5.9 &nbsp;&nbsp; Max: 31.8</p></h4>
+    <iframe width="450" height="260" src="https://thingspeak.com/channels/3002884/charts/4?dynamic=true&results=100"></iframe>
+    <br /><br /><br />
+
+    <h2><p style="text-align:center;">FOG SENSOR</p></h2>
+    <iframe width="450" height="260" src="https://thingspeak.com/channels/3002884/charts/5?dynamic=true&results=100"></iframe>
+    <br /><br /><br />
+
+    <h2><p style="text-align:center;">RAIN SENSOR</p></h2>
+    <iframe width="450" height="260" src="https://thingspeak.com/channels/3002884/charts/6?dynamic=true&results=100"></iframe>
+  </div>
+
+  <!-- Live Updates -->
+  <div class="container" id="live_updates-page">
+    <p style="text-align:center;">Live charts from ThingSpeak. Each graph represents a different field from your channel.</p>
+
+    <h2><p style="text-align:center;">TEMPERATURE</p></h2>
+    <iframe
+      width="450"
+      height="260"
+      style="border: 1px solid #cccccc;"
+      src="https://thingspeak.com/channels/3002884/charts/1?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15"
+    ></iframe>
+    <br /><br /><br />
+
+    <h2><p style="text-align:center;">HUMIDITY</p></h2>
+    <iframe
+      width="450"
+      height="260"
+      style="border: 1px solid #cccccc;"
+      src="https://thingspeak.com/channels/3002884/charts/2?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15"
+    ></iframe>
+    <br /><br /><br />
+
+    <h2><p style="text-align:center;">BMP PRESSURE</p></h2>
+    <iframe
+      width="450"
+      height="260"
+      style="border: 1px solid #cccccc;"
+      src="https://thingspeak.com/channels/3002884/charts/3?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15"
+    ></iframe>
+    <br /><br /><br />
+
+    <h2><p style="text-align:center;">BMP TEMPERATURE</p></h2>
+    <iframe
+      width="450"
+      height="260"
+      style="border: 1px solid #cccccc;"
+      src="https://thingspeak.com/channels/3002884/charts/4?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15"
+    ></iframe>
+    <br /><br /><br />
+
+    <h2><p style="text-align:center;">FOG SENSOR</p></h2>
+    <iframe
+      width="450"
+      height="260"
+      style="border: 1px solid #cccccc;"
+      src="https://thingspeak.com/channels/3002884/charts/5?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15"
+    ></iframe>
+    <br /><br /><br />
+
+    <h2><p style="text-align:center;">RAIN SENSOR</p></h2>
+    <iframe
+      width="450"
+      height="260"
+      style="border: 1px solid #cccccc;"
+      src="https://thingspeak.com/channels/3002884/charts/6?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15"
+    ></iframe>
+  </div>
+
+  <!-- Rain Sensor Prediction Page Content -->
+  <div class="container" id="rain-page">
+    <h2>Rain Sensor Prediction</h2>
+    <div class="prediction-box">
+      <b>Current Rain Prediction:</b> <span id="current_rain_prediction">Fetching...</span>
+      <script src="ml.js"></script>
+    </div>
+    <script src="ml2.js"></script>
+  </div>
+  <!-- Team details -->
+   <div class="container" id="Team-page">
+      <h2>AI Avengers</h2>
+      <h3>Aim</h3>
+      <ul>
+        <li>
+          <li>Our team is a group of passionate engineers and developers dedicated to building an AI-based weather monitoring system. Combining expertise in sensor technology, data science, and software development, we strive to deliver accurate, real-time environmental insights to help communities make informed decisions.</li>
+        </li>
+      </ul>
+      <br><br>
+      <h3>Meet the Team</h3>
+      <ul>
+        <li><b>Name:</b>Mogilicherla Bindu pranaya</li>
+        <li><b>Role: </b> </li>
+        <li><b>Bio: </b> </li>
+        <li><b>Contact: </b> </li>
+      </ul>
+      <br><br>
+      <ul>
+        <li><b>Name:</b>Chaparthi Krishnaveni</li>
+        <li><b>Role: </b> </li>
+        <li><b>Bio: </b> </li>
+        <li><b>Contact: </b> </li>
+      </ul>
+      <br><br>
+      <ul>
+        <li><b>Name:</b>Vankudoth Jhansi</li>
+        <li><b>Role: </b> </li>
+        <li><b>Bio: </b> </li>
+        <li><b>Contact: </b> </li>
+      </ul>
+      <br><br>
+      <ul>
+        <li><b>Name:</b>Pakala Kavya Sri</li>
+        <li><b>Role: </b> </li>
+        <li><b>Bio: </b> </li>
+        <li><b>Contact: </b> </li>
+      </ul>
+   </div>
+</body>
+</html>

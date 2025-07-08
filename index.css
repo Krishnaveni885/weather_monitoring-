@@ -1,0 +1,185 @@
+/* Reset & Base Styling */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #f5f5f5;
+  color: #2e3a59;
+  padding: 20px;
+}
+
+/* Header Title */
+h1 {
+  background: #003b76;
+  color: white;
+  padding: 1.5em;
+  text-align: center;
+  font-size: 2.2em;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Navigation Bar */
+#navbar {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  background: white;
+  padding: 12px 24px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  margin: 30px auto;
+  max-width: 1000px;
+  gap: 14px;
+}
+
+#navbar a {
+  color: #004080;
+  text-decoration: none;
+  padding: 10px 16px;
+  font-weight: bold;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+#navbar a:hover,
+#navbar a.active {
+  background-color: #e6f0ff;
+  color: #003b76;
+}
+
+/* Section Containers */
+.container {
+  display: none;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.05);
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+.container.active {
+  display: block;
+}
+
+/* Section Headings */
+h2 {
+  color: #004080;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Sensor Table */
+.sensor-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.sensor-table th,
+.sensor-table td {
+  padding: 12px 16px;
+  text-align: center;
+  border: 1px solid #ddd;
+}
+
+.sensor-table th {
+  background: #003b76;
+  color: white;
+}
+
+.sensor-table tr:nth-child(even) {
+  background: #f0f6ff;
+}
+
+/* About Page Lists */
+#about-page ul {
+  list-style: disc inside;
+  margin: 20px 0;
+  padding: 20px;
+  background: #f9fbff;
+  border-left: 4px solid #004080;
+  border-radius: 8px;
+}
+
+#about-page li {
+  margin: 8px 0;
+  line-height: 1.5;
+}
+
+/* Iframes (Graphs) */
+iframe {
+  display: block;
+  margin: 25px auto;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 2px 14px rgba(0, 0, 0, 0.1);
+}
+
+/* Rain Prediction Box */
+.prediction-box {
+  background: #e6f0ff;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  border-left: 5px solid #004080;
+  font-weight: bold;
+  color: #003b76;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Footer Note */
+.container p {
+  text-align: center;
+  font-size: 0.85em;
+  color: #666;
+  margin-top: 20px;
+}
+
+/* Buttons (if needed) */
+button {
+  background: #004080;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s ease;
+  margin-top: 20px;
+}
+
+button:hover {
+  background: #0066cc;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  #navbar {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .sensor-table,
+  iframe {
+    width: 100% !important;
+  }
+
+  .prediction-box {
+    margin: 20px 10px;
+  }
+}
+
+/* Fade Animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
