@@ -57,11 +57,11 @@ h1 {
   display: none;
   max-width: 1000px;
   margin: 0 auto;
-  padding: 20px;
   background: white;
   border-radius: 10px;
   box-shadow: 0 4px 14px rgba(0,0,0,0.05);
   animation: fadeIn 0.4s ease-in-out;
+  padding: 30px;
 }
 
 .container.active {
@@ -183,3 +183,39 @@ button:hover {
   from { opacity: 0; transform: translateY(10px); }
   to   { opacity: 1; transform: translateY(0); }
 }
+#navbar a.active {
+  font-weight: bold;
+  color: #007BFF;
+  border-bottom: 2px solid #007BFF;
+}
+.center-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh; /* Makes it vertically centered */
+}
+
+#rain-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#rain-form input {
+  width: 250px;
+  padding: 8px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+#rain-form button {
+  padding: 10px 20px;
+  background-color: #003366;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
