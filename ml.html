@@ -4,76 +4,40 @@
   <meta charset="UTF-8" />
   <title>AI Weather Monitoring</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="index.css" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
 </head>
 <body>
   <h1>AI BASED WEATHER MONITORING</h1>
 
+  {% set labels = ['TEMPERATURE', 'HUMIDITY', 'BMP PRESSURE', 'BMP TEMPERATURE', 'FOG SENSOR', 'RAIN SENSOR'] %}
+
   <nav id="navbar">
-    
-    <a href="#" class="active" onclick="showPage('home')">Homepage</a>
-    <a href="#" onclick="showPage('about')">About</a>
-    <a href="#" onclick="showPage('graph')">Demo</a>
-    <a href="#" onclick="showPage('live_updates')">Live Updates</a>
-    <a href="#" onclick="showPage('rain')">Rain Sensor Prediction</a>
-    <a href="#" onclick="showPage('Team')">Team details</a>
+    <a href="#" class="active" onclick="showPage('home', event)">Homepage</a>
+    <a href="#" onclick="showPage('about', event)">About</a>
+    <a href="#" onclick="showPage('graph', event)">Demo</a>
+    <a href="#" onclick="showPage('live_updates', event)">ThingSpeak</a>
+    <a href="#" onclick="showPage('future_prediction', event)">Future Weather Prediction</a>
+    <a href="#" onclick="showPage('Team', event)">Team Details</a>
   </nav>
 
-  <!-- Home Page Content -->
   <div class="container active" id="home-page">
     <h2>Latest Sensor Readings</h2>
     <table class="sensor-table">
       <thead>
-        <tr>
-          <th>Sensor</th>
-          <th>Parameter</th>
-          <th>Value</th>
-          <th>Unit</th>
-        </tr>
+        <tr><th>Sensor</th><th>Parameter</th><th>Value</th><th>Unit</th></tr>
       </thead>
       <tbody>
-        <tr>
-          <td>DHT11</td>
-          <td>Temperature</td>
-          <td id="temp_dht11">--</td>
-          <td>°C</td>
-        </tr>
-        <tr>
-          <td>DHT11</td>
-          <td>Humidity</td>
-          <td id="humidity_dht11">--</td>
-          <td>%</td>
-        </tr>
-        <tr>
-          <td>BMP280</td>
-          <td>Temperature</td>
-          <td id="temp_bmp280">--</td>
-          <td>°C</td>
-        </tr>
-        <tr>
-          <td>BMP280</td>
-          <td>Pressure</td>
-          <td id="pressure_bmp280">--</td>
-          <td>hPa</td>
-        </tr>
-        <tr>
-          <td>Fog Sensor</td>
-          <td>Fog Level</td>
-          <td id="fog_sensor">--</td>
-          <td>-</td>
-        </tr>
-        <tr>
-          <td>Rain Sensor</td>
-          <td>Rain Detected</td>
-          <td id="rain_sensor">--</td>
-          <td>-</td>
-        </tr>
+        <tr><td>DHT11</td><td>Temperature</td><td id="temp_dht11">--</td><td>°C</td></tr>
+        <tr><td>DHT11</td><td>Humidity</td><td id="humidity_dht11">--</td><td>%</td></tr>
+        <tr><td>BMP280</td><td>Temperature</td><td id="temp_bmp280">--</td><td>°C</td></tr>
+        <tr><td>BMP280</td><td>Pressure</td><td id="pressure_bmp280">--</td><td>hPa</td></tr>
+        <tr><td>Fog Sensor</td><td>Fog Level</td><td id="fog_sensor">--</td><td>-</td></tr>
+        <tr><td>Rain Sensor</td><td>Rain Detected</td><td id="rain_sensor">--</td><td>-</td></tr>
       </tbody>
     </table>
     <p style="font-size:0.9em;color:#888;text-align:center;">(Values are fetched live from ThingSpeak.)</p>
   </div>
 
-  <!-- About Page Content -->
   <div class="container" id="about-page">
     <h2>About the Project</h2>
     <h3>Problem statement</h3>
@@ -110,143 +74,49 @@
     </ul>
   </div>
 
-  <!-- Graph Page Content -->
   <div class="container" id="graph-page">
     <h2>Sensor Data Graphs</h2>
-
-    <h2><p style="text-align:center;">TEMPERATURE</p></h2>
-    <h4><p style="text-align:center;">Min: 4.2 &nbsp;&nbsp; Max: 35.8</p></h4>
-    <iframe width="450" height="260" src="https://thingspeak.com/channels/3002884/charts/1?dynamic=true&results=100"></iframe>
-    <br /><br /><br />
-
-    <h2><p style="text-align:center;">HUMIDITY</p></h2>
-    <h4><p style="text-align:center;">Min: 39% &nbsp;&nbsp; Max: 98%</p></h4>
-    <iframe width="450" height="260" src="https://thingspeak.com/channels/3002884/charts/2?dynamic=true&results=100"></iframe>
-    <br /><br /><br />
-
-    <h2><p style="text-align:center;">BMP PRESSURE</p></h2>
-    <h4><p style="text-align:center;">Min: 1000.0 &nbsp;&nbsp; Max: 1032.2</p></h4>
-    <iframe width="450" height="260" src="https://thingspeak.com/channels/3002884/charts/3?dynamic=true&results=100"></iframe>
-    <br /><br /><br />
-
-    <h2><p style="text-align:center;">BMP TEMPERATURE</p></h2>
-    <h4><p style="text-align:center;">Min: 5.9 &nbsp;&nbsp; Max: 31.8</p></h4>
-    <iframe width="450" height="260" src="https://thingspeak.com/channels/3002884/charts/4?dynamic=true&results=100"></iframe>
-    <br /><br /><br />
-
-    <h2><p style="text-align:center;">FOG SENSOR</p></h2>
-    <iframe width="450" height="260" src="https://thingspeak.com/channels/3002884/charts/5?dynamic=true&results=100"></iframe>
-    <br /><br /><br />
-
-    <h2><p style="text-align:center;">RAIN SENSOR</p></h2>
-    <iframe width="450" height="260" src="https://thingspeak.com/channels/3002884/charts/6?dynamic=true&results=100"></iframe>
+      <div class="prediction-box">
+    <b>Current Rain Prediction:</b> <span id="current_rain_prediction">Fetching...</span>
+  </div><br>
+    {% for i in range(1, 7) %}
+      <h3 style="text-align:center;">{{ labels[i-1] }}</h3>
+      <iframe width="450" height="260" src="https://thingspeak.com/channels/3002884/charts/{{ i }}?dynamic=true&results=100"></iframe><br><br>
+    {% endfor %}
   </div>
 
-  <!-- Live Updates -->
   <div class="container" id="live_updates-page">
-    <p style="text-align:center;">Live charts from ThingSpeak. Each graph represents a different field from your channel.</p>
-
-    <h2><p style="text-align:center;">TEMPERATURE</p></h2>
-    <iframe
-      width="450"
-      height="260"
-      style="border: 1px solid #cccccc;"
-      src="https://thingspeak.com/channels/3002884/charts/1?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15"
-    ></iframe>
-    <br /><br /><br />
-
-    <h2><p style="text-align:center;">HUMIDITY</p></h2>
-    <iframe
-      width="450"
-      height="260"
-      style="border: 1px solid #cccccc;"
-      src="https://thingspeak.com/channels/3002884/charts/2?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15"
-    ></iframe>
-    <br /><br /><br />
-
-    <h2><p style="text-align:center;">BMP PRESSURE</p></h2>
-    <iframe
-      width="450"
-      height="260"
-      style="border: 1px solid #cccccc;"
-      src="https://thingspeak.com/channels/3002884/charts/3?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15"
-    ></iframe>
-    <br /><br /><br />
-
-    <h2><p style="text-align:center;">BMP TEMPERATURE</p></h2>
-    <iframe
-      width="450"
-      height="260"
-      style="border: 1px solid #cccccc;"
-      src="https://thingspeak.com/channels/3002884/charts/4?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15"
-    ></iframe>
-    <br /><br /><br />
-
-    <h2><p style="text-align:center;">FOG SENSOR</p></h2>
-    <iframe
-      width="450"
-      height="260"
-      style="border: 1px solid #cccccc;"
-      src="https://thingspeak.com/channels/3002884/charts/5?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15"
-    ></iframe>
-    <br /><br /><br />
-
-    <h2><p style="text-align:center;">RAIN SENSOR</p></h2>
-    <iframe
-      width="450"
-      height="260"
-      style="border: 1px solid #cccccc;"
-      src="https://thingspeak.com/channels/3002884/charts/6?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15"
-    ></iframe>
+    <h2>ThingSpeak</h2>
+    {% for i in range(1, 7) %}
+      <h3 style="text-align:center;">{{ labels[i-1] }}</h3>
+      <iframe width="450" height="260" style="border:1px solid #ccc;" src="https://thingspeak.com/channels/3002884/charts/{{ i }}?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15"></iframe><br><br>
+    {% endfor %}
   </div>
 
-  <!-- Rain Sensor Prediction Page Content -->
-  <div class="container" id="rain-page">
-    <h2>Rain Sensor Prediction</h2>
-    <div class="prediction-box">
-      <b>Current Rain Prediction:</b> <span id="current_rain_prediction">Fetching...</span>
-      <script src="ml.js"></script>
-    </div>
-    <script src="ml2.js"></script>
+  <div class="container" id="future_prediction-page">
+    <h2 style="text-align:center;">AI-Based Future Weather Prediction</h2>
+    <form id="rain-form">
+      <input id="input-pressure" placeholder="Pressure (hPa)" type="number" required><br><br>
+      <input id="input-mintemp" placeholder="Min Temp (°C)" type="number" required><br><br>
+      <input id="input-maxtemp" placeholder="Max Temp (°C)" type="number" required><br><br>
+      <input id="input-dewpoint" placeholder="Dew Point (°C)" type="number" required><br><br>
+      <input id="input-humidity" placeholder="Humidity (%)" type="number" required><br><br>
+      <button type="submit">Predict</button>
+    </form>
+    <div id="manual-prediction-result" style="margin-top:20px; font-weight:bold;"></div>
   </div>
-  <!-- Team details -->
-   <div class="container" id="Team-page">
-      <h2>AI Avengers</h2>
-      <h3>Aim</h3>
-      <ul>
-        <li>
-          <li>Our team is a group of passionate engineers and developers dedicated to building an AI-based weather monitoring system. Combining expertise in sensor technology, data science, and software development, we strive to deliver accurate, real-time environmental insights to help communities make informed decisions.</li>
-        </li>
-      </ul>
-      <br><br>
-      <h3>Meet the Team</h3>
-      <ul>
-        <li><b>Name:</b>Mogilicherla Bindu pranaya</li>
-        <li><b>Role: </b> </li>
-        <li><b>Bio: </b> </li>
-        <li><b>Contact: </b> </li>
-      </ul>
-      <br><br>
-      <ul>
-        <li><b>Name:</b>Chaparthi Krishnaveni</li>
-        <li><b>Role: </b> </li>
-        <li><b>Bio: </b> </li>
-        <li><b>Contact: </b> </li>
-      </ul>
-      <br><br>
-      <ul>
-        <li><b>Name:</b>Vankudoth Jhansi</li>
-        <li><b>Role: </b> </li>
-        <li><b>Bio: </b> </li>
-        <li><b>Contact: </b> </li>
-      </ul>
-      <br><br>
-      <ul>
-        <li><b>Name:</b>Pakala Kavya Sri</li>
-        <li><b>Role: </b> </li>
-        <li><b>Bio: </b> </li>
-        <li><b>Contact: </b> </li>
-      </ul>
-   </div>
+
+  <div class="container" id="Team-page">
+    <h2>AI Avengers</h2>
+    <ul>
+      <li><b>Name:</b> Mogilicherla Bindu Pranaya</li>
+      <li><b>Name:</b> Chaparthi Krishnaveni</li>
+      <li><b>Name:</b> Vankudoth Jhansi</li>
+      <li><b>Name:</b> Pakala Kavya Sri</li>
+    </ul>
+  </div>
+
+  <script src="{{ url_for('static', filename='ml1.js') }}"></script>
+  <script src="{{ url_for('static', filename='ml2.js') }}"></script>
 </body>
 </html>
