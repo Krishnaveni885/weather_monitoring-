@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Rain Prediction</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #e0f7fa;
+      padding: 30px;
+    }
+    .form-container {
+      background: white;
+      padding: 25px;
+      max-width: 480px;
+      margin: auto;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+      color: #00796b;
+    }
+    label {
+      display: block;
+      margin-top: 12px;
+      font-weight: bold;
+    }
+    input {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      background-color: #00796b;
+      color: white;
+      padding: 10px;
+      width: 100%;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      margin-top: 20px;
+      cursor: pointer;
+    }
+    .result {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 18px;
+      color: green;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Rain Prediction</h2>
+    <form action="/predict" method="POST">
+      <label for="pressure">Pressure (hPa):</label>
+      <input type="number" step="0.1" name="pressure" required>
+
+      <label for="mintemp">Min Temperature (°C):</label>
+      <input type="number" step="0.1" name="mintemp" required>
+
+      <label for="maxtemp">Max Temperature (°C):</label>
+      <input type="number" step="0.1" name="maxtemp" required>
+
+      <label for="dewpoint">Dew Point (°C):</label>
+      <input type="number" step="0.1" name="dewpoint" required>
+
+      <label for="humidity">Humidity (%):</label>
+      <input type="number" step="0.1" name="humidity" required>
+
+      <button type="submit">Predict</button>
+    </form>
+
+    {% if prediction %}
+      <div class="result">
+        <p><strong>Prediction:</strong> {{ prediction }}</p>
+        <p>Probability of Rain: {{ probability | round(2) }}</p>
+      </div>
+    {% endif %}
+  </div>
+</body>
+</html>
